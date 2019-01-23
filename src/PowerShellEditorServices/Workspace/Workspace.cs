@@ -345,6 +345,12 @@ namespace Microsoft.PowerShell.EditorServices
 
                     continue;
                 }
+                catch (Exception e)
+                {
+                    this.logger.WriteHandledException(
+                        $"Encountered an exception handling path '{folderPath}'",
+                        e);
+                }
 
                 foundFiles.AddRange(psFiles);
             }
@@ -385,6 +391,12 @@ namespace Microsoft.PowerShell.EditorServices
                     e);
 
                 return;
+            }
+            catch (Exception e)
+            {
+                this.logger.WriteHandledException(
+                    $"Unable to enumerable directories in path '{folderPath}' due to an exception occurring",
+                    e);
             }
 
             foreach (string subDir in subDirs)
